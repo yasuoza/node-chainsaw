@@ -72,17 +72,12 @@ Chainsaw.saw = function (builder, handlers) {
         if (autonext !== false) s.on('end', saw.next);
     };
 
-    saw.trap = saw.down = saw.jump = function () {
-        throw new Error("The chainsaw methods trap, down and jump " +
-                        "have been removed from default Chainsaw " +
-                        "instances for performance. To upgrade your " +
-                        "chainsaw, please call the .upgrade() " +
-                        "method. Sorry for the inconvenience.");
-    };
-
-    saw.upgrade = function () {
-        upgradeChainsaw(saw);
-    };
+    ['trap', 'down', 'jump'].forEach(function (method) {
+        saw[method] = function () {
+            upgradeChainsaw(saw);
+            saw[method].apply(this, [].slice.apply(arguments));
+        };
+    });
 
     return saw;
 };
