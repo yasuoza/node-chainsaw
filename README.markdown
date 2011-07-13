@@ -138,3 +138,20 @@ just do:
 
     expresso
 
+
+Light Mode vs Full Mode
+=======================
+
+`node-chainsaw` supports two different modes. In full mode, every
+action is recorded, which allows you to replay actions using the
+`jump()`, `trap()` and `down()` methods.
+
+However, if your chainsaws are long-lived, recording every action can
+consume a tremendous amount of memory, so we also offer a "light" mode
+where actions are not recorded and the aforementioned methods are
+disabled.
+
+To enable light mode simply use `Chainsaw.light()` to construct your
+saw, instead of `Chainsaw()`.
+
+
