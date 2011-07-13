@@ -6,6 +6,14 @@ function Chainsaw (builder) {
     var saw = Chainsaw.saw(builder, {});
     var r = builder.call(saw.handlers, saw);
     if (r !== undefined) saw.handlers = r;
+    saw.record();
+    return saw.chain();
+};
+
+Chainsaw.light = function ChainsawLight (builder) {
+    var saw = Chainsaw.saw(builder, {});
+    var r = builder.call(saw.handlers, saw);
+    if (r !== undefined) saw.handlers = r;
     return saw.chain();
 };
 
@@ -68,14 +76,25 @@ Chainsaw.saw = function (builder, handlers) {
         var r = builder.call(s.handlers, s);
 
         if (r !== undefined) s.handlers = r;
+
+        // If we are recording...
+        if ("undefined" !== typeof saw.step) {
+            // ... our children should, too
+            s.record();
+        }
+
         cb.apply(s.chain(), args);
         if (autonext !== false) s.on('end', saw.next);
     };
 
+    saw.record = function () {
+        upgradeChainsaw(saw);
+    };
+
     ['trap', 'down', 'jump'].forEach(function (method) {
         saw[method] = function () {
-            upgradeChainsaw(saw);
-            saw[method].apply(this, [].slice.apply(arguments));
+            throw new Error("To use the trap, down and jump features, please "+
+                            "call record() first to start recording actions.");
         };
     });
 
