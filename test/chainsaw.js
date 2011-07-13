@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Chainsaw = require('chainsaw');
+var Chainsaw = require('../index');
 
 exports.getset = function () {
     var to = setTimeout(function () {
