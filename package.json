@@ -1,6 +1,6 @@
 {
     "name" : "chainsaw",
-    "version" : "0.0.9",
+    "version" : "0.1.0",
     "description" : "Build chainable fluent interfaces the easy way... with a freakin' chainsaw!",
     "main" : "./index.js",
     "repository" : {
