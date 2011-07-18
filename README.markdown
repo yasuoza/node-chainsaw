@@ -11,6 +11,8 @@ Just call `Chainsaw` with a constructor function like in the examples below.
 In your methods, just do `saw.next()` to move along to the next event and
 `saw.nest()` to create a nested chain.
 
+![chainsaw](http://substack.net/images/chainsaw.png)
+
 Examples
 ========
 
