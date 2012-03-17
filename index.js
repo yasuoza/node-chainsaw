@@ -1,3 +1,9 @@
+/**
+ * substack / node-chainsaw
+ * mit licence
+ * https://github.com/substack/node-chainsaw
+ **/
+
 var Traverse = require('traverse');
 var EventEmitter = require('events').EventEmitter;
 
